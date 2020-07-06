@@ -45,6 +45,19 @@ app.post("/api/notes", (req, res) => {
   res.json(req.body);
 });
 
+app.delete("/api/notes/:id", (req, res)=>{
+    const id = req.params.id
+    fs.readFile(path.join(__dirname, "db/db.json"), "utf8", (err, data) => {
+        if (err) {
+          throw err;
+        } else {
+            const newData = JSON.parse(data).filter((obj)=> obj.id != id)
+            fs.writeFileSync(path.join(__dirname, "db/db.json"),JSON.stringify(newData),"utf8");
+        }
+    })
+    res.end()
+})
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
