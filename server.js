@@ -5,6 +5,9 @@ const fs = require("fs");
 const app = express();
 const PORT = 3000; //|| process.env.PORT;
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.get("/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "public/notes.html"));
 });
@@ -17,6 +20,27 @@ app.get("/api/notes", (req, res) => {
     }
   });
 });
+app.post("/api/notes", (req, res) => {
+  let newData;
+  console.log(req.body);
+  fs.readFile(path.join(__dirname, "db/db.json"), "utf8", (err, data) => {
+    if (err) {
+      throw err;
+    } else {
+      data = JSON.parse(data);
+      data.push(req.body);
+      data = JSON.stringify(data)
+      fs.writeFile(path.join(__dirname, "db/dbtest.json"),data,"utf8",(err) => {
+          if (err) {
+            throw err;
+          }
+        }
+      );
+    }
+  });
+  res.json(req.body);
+});
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
