@@ -7,5 +7,7 @@ The user can delete notes by clicking the delete button on each note.
 The program is currently deployed on heroku
 
 ## Links
-[Github Repo] (https://github.com/sdratch/HW11-Note-Taker)
-[Heroku] (https://rocky-plains-42313.herokuapp.com/)
+
+[Github Repo](https://github.com/sdratch/HW11-Note-Taker)
+
+[Heroku](https://rocky-plains-42313.herokuapp.com/)
